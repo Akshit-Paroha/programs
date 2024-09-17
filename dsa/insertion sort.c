@@ -23,12 +23,12 @@ int main()
         }
         a[j+1]=key; 
     }
-    printf("Your sorted array is:");
+    printf("Your sorted array is:\t");
 
 
     for ( i = 0; i < s; i++)
     {
-        printf("%d\n",a[i]);
+        printf("%d\t",a[i]);
     }
     return 0;
 }

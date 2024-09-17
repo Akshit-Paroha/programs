@@ -3,9 +3,10 @@
 int main()
 {
     int search,i,a[5],pos=-1;
+    printf("Enter your Array elements:-\n");
     for (i = 0; i < 5; i++)
     {
-        printf("Enter your Array element %d:",i+1);
+        printf("element %d:",i+1);
         scanf("%d",&a[i]);
     }
     printf("Enter the element to be searched:");
