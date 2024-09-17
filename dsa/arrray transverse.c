@@ -2,6 +2,7 @@
 
 int main()
 {
+    printf("title: array traversing (practical 1)\n\n");
     int a[10],i,size;
 
     printf("Enter the size of array:");

@@ -2,6 +2,7 @@
 
 int main()
 {
+    printf("Title: binary search(practical 3)\n\n");
     int low,high,mid,i,val,pos=-1,a[5];
     for ( i = 0; i < 5; i++)
     {

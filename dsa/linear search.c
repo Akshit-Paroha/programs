@@ -2,6 +2,7 @@
 
 int main()
 {
+    printf("Title: linear search (practical 2)\n\n");
     int search,i,a[5],pos=-1;
     printf("Enter your Array elements:-\n");
     for (i = 0; i < 5; i++)

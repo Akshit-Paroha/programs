@@ -2,6 +2,7 @@
 
 int main ()
 {
+    printf("Title: Bubble sort (practical 4)\n\n");
     int i,j,n,temp;
     printf("Enter the Size of array:");
     scanf("%d",&n);
@@ -19,7 +20,7 @@ int main ()
         {
             if (a[j] > a[j+1])
             {
-                int temp = a[j];
+                temp = a[j];
                 a[j] = a[j+1];
                 a[j+1] = temp;
             }
