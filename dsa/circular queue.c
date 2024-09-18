@@ -88,7 +88,7 @@ void dequeue()
         {
             front=(front+1)%n;    
         }
-        printf("Deleted %d",Q[front]);
+        printf("Deleted %d",Q[front-1]);
     }
 }
 
