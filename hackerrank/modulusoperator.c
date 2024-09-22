@@ -3,7 +3,7 @@
 int main()
 {
     int n,sum;
-    scanf("%d",n);
+    scanf("%d",&n);
     while(n>0)
     {
         sum+= n%10;
