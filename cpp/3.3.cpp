@@ -18,8 +18,7 @@ class GCD
 
 int main() 
 {
-    int num1 = 56;
-    int num2 = 98;
+    int num1 = 69;
+    int num2 = 42;
     cout << "GCD of " << num1 << " and " << num2 << " is " << GCD::findGCD(num1, num2) << endl;
-
 }

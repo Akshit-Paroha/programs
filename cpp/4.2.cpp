@@ -25,7 +25,7 @@ void compareValues(const CompareA& a, const CompareB& b)
 {
     if (a.valueA > b.valueB) 
     {
-        cout << "A has the larger value." << endl;
+        cout << " A has the larger value." << endl;
     } 
     
     else if (a.valueA < b.valueB) 
