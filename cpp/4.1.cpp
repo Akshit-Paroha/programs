@@ -10,7 +10,7 @@ class swapA
         swapA() 
         {
             a = 10;
-            }
+        }
 
         friend void swaping(swapA &a, swapB &b);
 };

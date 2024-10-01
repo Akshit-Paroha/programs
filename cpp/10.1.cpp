@@ -15,6 +15,9 @@ class payment
 
 class creditcard: public payment
 {
+    private:
+            string name;
+            int amount;
     public:
         creditcard(string n, int a):name(n),amount(a){}
         void makepayment() override
