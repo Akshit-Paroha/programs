@@ -1,4 +1,6 @@
 #include<iostream>
+#include<fstream>
+#include<string>
 using namespace std;
 
 class admin
@@ -16,7 +18,7 @@ class admin
             cin>>pass;
             if (username=="Admin" && pass=="password")
             {
-                cout<<"Welcome to the Jewelry management system!!";
+                cout<<"Welcome to the Jewelry management system!"<<endl;;
                 return 1;
             }
             else
@@ -26,6 +28,11 @@ class admin
             }  
         }
 };
+
+class inventory
+{
+
+}
 
 int main()
 {
