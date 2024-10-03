@@ -1,0 +1,7 @@
+This message is being read from
+the text file,the file was created
+to test the program files2.cpp
+the program files2.cpp will 
+read the text file line by line
+and display it in console
+Thank you!!
