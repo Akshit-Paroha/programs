@@ -53,7 +53,7 @@ int main() {
         cerr << "Error opening file for reading!" << endl;
         return 1;
     }
-
+ 
     // Read the student object from the file
     inFile >> student2;
     inFile.close();  // Close the file after reading

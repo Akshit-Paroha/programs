@@ -1,0 +1,18 @@
+Jewellry name:ring
+Jwellry code:jw1001
+Price:77001INR
+Jewellry name:ring
+Jwellry code:jw1001.000000
+Price:25000INR
+Jewellry name:ring
+Jwellry code:jw1001
+Price:25000INR
+Jewellry name:necklace
+Jwellry code:jw1001
+Price:25011INR
+Jewellry name:necklace
+Jwellry code:jw1001
+Price:101625INR
+Jewellry name:bangle
+Jwellry code:jw1001
+Price:86626INR

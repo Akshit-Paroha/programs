@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 int main() {
- ofstream outFile("data.txt",ios::app); // Creating and opening a file for writing
+ ofstream outFile("file_manual.txt",ios::app); // Creating and opening a file for writing
  if (!outFile) {
  cout << "File could not be opened." << endl;
  return 1;

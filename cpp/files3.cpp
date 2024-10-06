@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    ifstream infile("fil.txt");
+    ifstream infile("files2.txt");
     if (infile.is_open())
     {
         string line;
