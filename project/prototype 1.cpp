@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<conio.h>
 using namespace std;
 
 class admin
@@ -12,17 +13,43 @@ class admin
     
         void login()
         {
-            while (pass!="password" && username!="Admin")
+            while (pass!="password" || username!="Admin")
             {  
                 cout<<"Enter your username:";
                 cin>>username;
                 cout<<"Enter your password:";
-                cin>>pass;
-                if (pass!="password" && username!="Admin")
+                pass=hidepassword();
+                cout<<endl;
+                if (pass!="password" || username!="Admin")
                 {
                     cout<<"Invalid password!!\ntry again!!\n\n";
                 }
             }  
+        }
+
+        string hidepassword()
+        {
+            string password;
+            char ch;
+
+            while ((ch = getch())!='\r')
+            {
+                if (ch == '\b')
+                {
+                    if (!password.empty())
+                    {
+                        cout<<"\b\b";
+                        password.pop_back();
+                    }
+                }
+                else
+                {
+                    password.push_back(ch);
+                    cout<<"*";
+                }                
+            }
+            cout<<endl;
+            return password;
         }
 };
 
