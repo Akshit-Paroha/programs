@@ -83,6 +83,7 @@ class jewellery
             cin>>qty;
             cout<<"Enter gold purity \n 1)23+\n 2)18 \n3)lesser  :";
             cin>>karat;
+            writefile();
         }
         double calculatestoneprice()
         {
