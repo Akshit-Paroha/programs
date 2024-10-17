@@ -1,215 +1,350 @@
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <conio.h>
+
 using namespace std;
+struct Patient {
+    int id;
+    string name;
+    int age;
+    string ailment;
+    string admissionDate;
+    string phoneNumber;
+    double totalBill;
+    bool isDischarged;
+};
+struct Staff {
+    int id;
+    string name;
+    string position;
+};
 
-class admin {
+
+struct Doctor {
+    string name;
+    string specialization;
+};
+struct Appointment {
+    int patientId;
+    string appointmentDate;
+    Doctor doctor;
+};
+
+const int MAX_PATIENTS = 100;
+const int MAX_STAFF = 50;
+const int MAX_APPOINTMENTS = 100;
+class HospitalSystem {
 private:
-    string username;
-    string pass;
+    Patient patients[MAX_PATIENTS];
+    Staff staff[MAX_STAFF];
+    Appointment appointments[MAX_APPOINTMENTS];
+    int patientCount;
+    int staffCount;
+    int appointmentCount;
+    int patientIdCounter;
+    int staffIdCounter;
 
 public:
-    void login() {
-        while (pass != "password" || username != "Admin") {
-            cout << "Enter your username: ";
-            cin >> username;
-            cout << "Enter your password: ";
-            pass = maskPassword();
-            if (pass != "password" || username != "Admin") {
-                cerr << "\nInvalid credentials! Please try again.\n";
+    HospitalSystem() : patientCount(0), staffCount(0), appointmentCount(0), patientIdCounter(1), staffIdCounter(1) {}
+
+    void admitPatient() {
+        if (patientCount >= MAX_PATIENTS) {
+            cout << "Hospital is full! Cannot admit more patients.\n";
+            return;
+        }
+
+        Patient newPatient;
+        newPatient.id = patientIdCounter++;
+        newPatient.totalBill = 0;
+        newPatient.isDischarged = false;
+
+        cout << "Enter patient's name: ";
+        cin.ignore();
+        getline(cin, newPatient.name);
+
+        cout << "Enter patient's age: ";
+        cin >> newPatient.age;
+
+        cout << "Enter patient's illness: ";
+        cin.ignore();
+        getline(cin, newPatient.ailment);
+
+        cout << "Enter admission date (dd/mm/yyyy): ";
+        getline(cin, newPatient.admissionDate);
+
+        cout << "Enter patient's phone number: "; 
+        getline(cin, newPatient.phoneNumber);
+
+        patients[patientCount] = newPatient;
+        patientCount++;
+
+        cout << "Patient admitted successfully!\n";
+    }
+
+    void scheduleAppointment() {
+        if (appointmentCount >= MAX_APPOINTMENTS) {
+            cout << "No more appointments can be scheduled!\n";
+            return;
+        }
+
+        int patientId;
+        cout << "Enter patient ID to schedule an appointment: ";
+        cin >> patientId;
+
+        bool patientExists = false;
+        for (int i = 0; i < patientCount; i++) {
+            if (patients[i].id == patientId) {
+                patientExists = true;
+                break;
             }
+        }
+
+        if (!patientExists) {
+            cout << "Invalid patient ID!\n";
+            return;
+        }
+
+        Appointment newAppointment;
+        newAppointment.patientId = patientId;
+
+        cout << "Enter appointment date (dd/mm/yyyy): ";
+        cin.ignore();
+        getline(cin, newAppointment.appointmentDate);
+
+        cout << "Enter doctor's name: ";
+        getline(cin, newAppointment.doctor.name);
+        
+        cout << "Enter doctor's specialization: "; 
+        getline(cin, newAppointment.doctor.specialization);
+
+        appointments[appointmentCount] = newAppointment;
+        appointmentCount++;
+
+        cout << "Appointment scheduled successfully!\n";
+    }
+
+    void displayAppointments() {
+        if (appointmentCount == 0) {
+            cout << "No appointments scheduled.\n";
+            return;
+        }
+
+        cout << "List of scheduled appointments:\n";
+        for (int i = 0; i < appointmentCount; i++) {
+            cout << "Patient ID: " << appointments[i].patientId
+                 << ", Appointment Date: " << appointments[i].appointmentDate
+                 << ", Doctor: " << appointments[i].doctor.name
+                 << ", Specialization: " << appointments[i].doctor.specialization << "\n";
         }
     }
 
-    string maskPassword() {
-        string password;
-        char ch;
-        while ((ch = getch()) != '\r') {
-            if (ch == '\b') {
-                if (!password.empty()) {
-                    cout << "\b \b";
-                    password.pop_back();
+    void cancelAppointment() {
+        if (appointmentCount == 0) {
+            cout << "No appointments to cancel.\n";
+            return;
+        }
+
+        int patientId;
+        cout << "Enter patient ID to cancel the appointment: ";
+        cin >> patientId;
+
+        for (int i = 0; i < appointmentCount; i++) {
+            if (appointments[i].patientId == patientId) {
+                for (int j = i; j < appointmentCount - 1; j++) {
+                    appointments[j] = appointments[j + 1];
                 }
-            } else {
-                password.push_back(ch);
-                cout << '*';
+                appointmentCount--;
+                cout << "Appointment canceled successfully!\n";
+                return;
             }
         }
-        cout << endl << endl;
-        return password;
-    }
-};
 
-class jewellery {
-public:
-    static int nextitem;
-    string itemcode, itemname;
-    int goldprice;
-    double weight, stoneprice, finalprice, qty;
-    int stone, karat, item;
-
-    jewellery() {
-        goldprice = 7700;
-        item = nextitem;
-        nextitem++;
+        cout << "Appointment not found for patient ID " << patientId << ".\n";
     }
 
-    void input() {
-        cout << "Enter jewellery name: ";
-        cin >> itemname;
-        cout << "Enter gold weight of jewellery in grams: ";
-        cin >> weight;
-        cout << "Select your stone:\n1) Diamond\n2) Emerald\n3) Ruby\n4) Opal\n5) No stone\n";
-        cin >> stone;
-        cout << "Enter quantity: ";
-        cin >> qty;
-        cout << "Enter gold purity:\n1) 23+\n2)22 \n3)21 \n4)20\n5)18\n6)lesser\nSelect Your option: ";
-        cin >> karat;
-        itemcode = "jw" + itemname + to_string(item);
-        stoneprice = calculatestoneprice();
-        finalprice = calculateprice();
-        writefile();
-    }
+    void dischargePatient() {
+        int patientId;
+        cout << "Enter patient ID to discharge: ";
+        cin >> patientId;
 
-    double calculatestoneprice() {
-        switch (stone) {
-            case 1: return 25000;
-            case 2: return 15000;
-            case 3: return 20000;
-            case 4: return 10000;
-            default: return 0;
-        }
-    }
+        for (int i = 0; i < patientCount; i++) {
+            if (patients[i].id == patientId) {
+                if (patients[i].isDischarged) {
+                    cout << "Patient has already been discharged.\n";
+                    return;
+                }
 
-    double calculatekarat() {
-        switch (karat) {
-            case 1: return 0.96;
-            case 2: return 0.91;
-            case 3: return 0.90;
-            case 4: return 0.84;
-            case 5: return 0.75;
-            default: return 0.5;
-        }
-    }
-
-    int calculateprice() {
-        return calculatekarat() * goldprice * weight * qty + stoneprice;
-    }
-
-    void writefile() {
-        ofstream ofile("details.txt");
-        if (!ofile) {
-            cerr << "Failed to open file!" << endl;
-            return;
-        }
-
-        ofile << "Item Name: " << itemname << "|";
-        ofile << "Item code: " << itemcode << "|";
-        ofile << "Final price: " << finalprice << endl;
-        ofile.close();
-    }
-
-    void readfile() {
-        ifstream ifile("details.txt");
-        if (!ifile) {
-            cerr << "Failed to open file!" << endl;
-            return;
-        }
-        string line;
-        while (getline(ifile, line)) {
-            cout << line << endl;
-        }
-        ifile.close();
-    }
-
-    static void setNextItem() {
-        ifstream codeFile("itemcode.txt");
-        nextitem = 1;
-
-        if (codeFile) {
-            string line;
-            int lineCount = 0;
-
-            while (getline(codeFile, line)) {
-                lineCount++;
-            }
-            nextitem = lineCount + 1;
-            codeFile.close();
-        }
-    }
-};
-
-int jewellery::nextitem = 101;
-
-class inventory {
-public:
-    void writefile(jewellery& j) {
-        ofstream ofile("inventory.txt", ios::app);
-        if (!ofile) {
-            cerr << "Failed to open file!" << endl;
-            return;
-        }
-
-        ofile << j.itemname << "|";
-        ofile << j.itemcode << "|";
-        ofile << j.finalprice << endl;
-        ofile.close();
-    }
-
-    void readfile() {
-        ifstream ifile("inventory.txt");
-        if (!ifile) {
-            cerr << "Failed to open file!" << endl;
-            return;
-        }
-        string line;
-        while (getline(ifile, line)) {
-            cout << line << endl;
-        }
-        ifile.close();
-    }
-
-    void searchitem() {
-        ifstream i("inventory.txt");
-        if (!i) {
-            cerr << "Failed to open file" << endl;
-            return;
-        }
-        string searchCode;
-        string line;
-        bool found = false;
-        cout << "Enter the jewellery code to search: ";
-        cin >> searchCode;
-        while (getline(i, line)) {
-            if (line.find(searchCode) != string::npos) {
-                cout << "Item Name|Item Code|Price" << endl;
-                cout << line << endl;
-                found = true;
+                patients[i].isDischarged = true;
+                cout << "Patient " << patients[i].name << " has been discharged.\n";
+                return;
             }
         }
-        if (!found) {
-            cout << "Can't find the given item code in the file" << endl;
+
+        cout << "Invalid patient ID!\n";
+    }
+
+    void processPayment() {
+        int patientId;
+        double amountPaid;
+        cout << "Enter patient ID for billing: ";
+        cin >> patientId;
+
+        for (int i = 0; i < patientCount; i++) {
+            if (patients[i].id == patientId) {
+                if (patients[i].isDischarged) {
+                    cout << "Enter total bill amount for the patient: $";
+                    cin >> patients[i].totalBill;
+
+                    cout << "Enter amount paid by the patient: $";
+                    cin >> amountPaid;
+
+                    double balance = patients[i].totalBill - amountPaid;
+
+                    if (balance == 0) {
+                        cout << "Full payment received. Thank you!\n";
+                    } else if (balance > 0) {
+                        cout << "Remaining balance: $" << balance << "\n";
+                    } else {
+                        cout << "Overpayment detected. Please refund $" << -balance << "\n";
+                    }
+                    return;
+                } else {
+                    cout << "Patient has not been discharged yet.\n";
+                    return;
+                }
+            }
         }
-        i.close();
+
+        cout << "Invalid patient ID!\n";
+    }
+    void addStaff() {
+        if (staffCount >= MAX_STAFF) {
+            cout << "Maximum staff capacity reached.\n";
+            return;
+        }
+
+        Staff newStaff;
+        newStaff.id = staffIdCounter++;
+
+        cout << "Enter staff member's name: ";
+        cin.ignore();
+        getline(cin, newStaff.name);
+
+        cout << "Enter staff member's position: ";
+        getline(cin, newStaff.position);
+
+        staff[staffCount] = newStaff;
+        staffCount++;
+
+        cout << "Staff member added successfully!\n";
+    }
+
+    void deleteStaff() {
+        int staffId;
+        cout << "Enter staff ID to delete: ";
+        cin >> staffId;
+
+        for (int i = 0; i < staffCount; i++) {
+            if (staff[i].id == staffId) {
+                for (int j = i; j < staffCount - 1; j++) {
+                    staff[j] = staff[j + 1];
+                }
+                staffCount--;
+                cout << "Staff member deleted successfully!\n";
+                return;
+            }
+        }
+
+        cout << "Invalid staff ID!\n";
+    }
+
+    void displayPatients() {
+        if (patientCount == 0) {
+            cout << "No patients admitted.\n";
+            return;
+        }
+
+        cout << "List of admitted patients:\n";
+        for (int i = 0; i < patientCount; i++) {
+            cout << "ID: " << patients[i].id << ", Name: " << patients[i].name
+                 << ", Age: " << patients[i].age << ", Ailment: " << patients[i].ailment
+                 << ", Admission Date: " << patients[i].admissionDate
+                 << ", Phone Number: " << patients[i].phoneNumber    
+                 << ", Total Bill: $" << patients[i].totalBill
+                 << ", Discharged: " << (patients[i].isDischarged ? "Yes" : "No") << "\n";
+        }
+    }
+
+    void displayStaff() {
+        if (staffCount == 0) {
+            cout << "No staff members available.\n";
+            return;
+        }
+
+        cout << "List of staff members:\n";
+        for (int i = 0; i < staffCount; i++) {
+            cout << "ID: " << staff[i].id << ", Name: " << staff[i].name
+                 << ", Position: " << staff[i].position << "\n";
+        }
     }
 };
 
 int main() {
-    jewellery::setNextItem();
+    HospitalSystem hospital;
 
-    admin* ptra = new admin;
-    ptra->login();
-    delete ptra;
+    int choice;
+    do {
+        cout << "\nHospital Management System Menu:\n";
+        cout << "1. Admit Patient\n";
+        cout << "2. Schedule Appointment\n";
+        cout << "3. Display Appointments\n";
+        cout << "4. Cancel Appointment\n";  
+        cout << "5. Discharge Patient\n";
+        cout << "6. Process Payment\n";
+        cout << "7. Add Staff Member\n";
+        cout << "8. Delete Staff Member\n";
+        cout << "9. Display All Patients\n";
+        cout << "10. Display All Staff Members\n";
+        cout << "11. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    jewellery j;
-    j.input();
-    j.readfile();
-
-    inventory inv;
-    inv.writefile(j);
-    inv.readfile();
-    inv.searchitem();
-
+        switch (choice) {
+            case 1:
+                hospital.admitPatient();
+                break;
+            case 2:
+                hospital.scheduleAppointment();
+                break;
+            case 3:
+                hospital.displayAppointments();
+                break;
+            case 4:
+                hospital.cancelAppointment();  
+                break;
+            case 5:
+                hospital.dischargePatient();
+                break;
+            case 6:
+                hospital.processPayment();
+                break;
+            case 7:
+                hospital.addStaff();
+                break;
+            case 8:
+                hospital.deleteStaff();
+                break;
+            case 9:
+                hospital.displayPatients();
+                break;
+            case 10:
+                hospital.displayStaff();
+                break;
+            case 11:
+                cout << "Exiting the system...\n";
+                break;
+            default:
+                cout << "Invalid choice! Please try again.\n";
+        }
+    } while (choice != 11);  
     return 0;
 }
