@@ -1,0 +1,16 @@
+Customer Name: Palak
+Contact Number: 702033151
+Residential Address: anant nagar
+Purchased Item: chain
+Item Code: jwchain103
+Item Price: 97070
+Total Purchase Amount: 97070
+------------------------
+Customer Name: Palak
+Contact Number: 702033151
+Residential Address: anant nagar
+Purchased Item: bracelet
+Item Code: jwbracelet108
+Item Price: 34650
+Total Purchase Amount: 131720
+------------------------

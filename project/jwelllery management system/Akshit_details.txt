@@ -1,0 +1,16 @@
+Customer Name: Akshit
+Contact Number: 7887404975
+Residential Address: anant nagar
+Purchased Item: ring
+Item Code: jwring101
+Item Price: 60035
+Total Purchase Amount: 60035
+------------------------
+Customer Name: Akshit
+Contact Number: 7887404945
+Residential Address: anant nagar
+Purchased Item: Bracelet
+Item Code: jwBracelet103
+Item Price: 69300
+Total Purchase Amount: 129335
+------------------------
