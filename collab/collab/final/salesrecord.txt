@@ -1,0 +1,13 @@
+ring|jwring101|60035|1
+Bracelet|jwBracelet103|69300|1
+Total Amount: 129335
+chain|jwchain103|97070|1
+bracelet|jwbracelet108|34650|1
+Total Amount: 131720
+ring|jwring101|60035|1
+Bracelet|jwBracelet109|89812.8|1
+Total Amount: 149848
+necklace|jwnecklace104|91670|1
+bracelet|jwbracelet110|112266|1
+Total Amount: 203936
+ 

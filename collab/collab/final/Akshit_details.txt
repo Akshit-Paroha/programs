@@ -1,0 +1,18 @@
+Customer Name: Akshit
+Contact Number: 7038149304
+Residential Address: Anant nagar, Nagpur
+Purchased Item: Bracelet
+Item Code: jwBracelet109
+Item Price: 89812.8
+Total Purchase Amount: 149848
+------------------------
+Purchased Item: necklace
+Item Code: jwnecklace104
+Item Price: 91670
+Total Purchase Amount: 91670
+------------------------
+Purchased Item: bracelet
+Item Code: jwbracelet110
+Item Price: 112266
+Total Purchase Amount: 203936
+------------------------

@@ -1,0 +1,10 @@
+
+ring|jwring101|60035|1
+necklace|jwnecklace102|89300|1
+chain|jwchain103|97070|1
+necklace|jwnecklace104|91670|1
+ring|jwring105|97070|1
+necklace|jwnecklace106|97070|1
+necklace|jwnecklace107|97070|1
+earing|jwearing108|115811|2
+ring|jwring109|72972.9|1
