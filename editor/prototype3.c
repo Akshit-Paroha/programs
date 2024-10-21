@@ -18,9 +18,9 @@ int top = -1;
 void insertAtEnd(struct Node **head, int data);
 void displayHiddenList(struct Node *head);
 void displayList(struct Node *head);
-int pickCard(struct Node *head, int position);
+int pickCardFromEnd(struct Node *head);
 void insertAtPosition(struct Node **head, int data, int position);
-void deleteFromPosition(struct Node **head, int position);
+void deleteFromEnd(struct Node **head);
 int getListLength(struct Node *head);
 void push(int data);
 void displayStack();
@@ -28,7 +28,7 @@ void displayStack();
 int main()
 {
     struct Node *head = NULL;
-    int position1, position2, picked1, picked2;
+    int picked1, picked2, position1, position2;
 
     // Initialize the linked list with pairs of numbers (1-10, each number appears twice)
     int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -45,16 +45,12 @@ int main()
         printf("\nHidden List: ");
         displayHiddenList(head);
 
-        printf("\nPick the position of the first card (1-%d): ", getListLength(head));
-        scanf("%d", &position1);
-        picked1 = pickCard(head, position1);
-
+        printf("\nPicking the first card from the end...\n");
+        picked1 = pickCardFromEnd(head);
         printf("You picked: %d\n", picked1);
 
-        printf("Pick the position of the second card (1-%d): ", getListLength(head));
-        scanf("%d", &position2);
-        picked2 = pickCard(head, position2);
-
+        printf("\nPicking the second card from the end...\n");
+        picked2 = pickCardFromEnd(head);
         printf("You picked: %d\n", picked2);
 
         if (picked1 == picked2)
@@ -63,20 +59,18 @@ int main()
             push(picked1);
 
             // Remove the matched pair from the linked list
-            if (position1 > position2)
-            {
-                deleteFromPosition(&head, position1);
-                deleteFromPosition(&head, position2);
-            }
-            else
-            {
-                deleteFromPosition(&head, position2);
-                deleteFromPosition(&head, position1);
-            }
+            deleteFromEnd(&head);
+            deleteFromEnd(&head);
         }
         else
         {
-            printf("\nNot matched! The cards remain hidden.\n");
+            printf("\nNot matched! Please specify where to insert the first card (%d): ", picked1);
+            scanf("%d", &position1);
+            insertAtPosition(&head, picked1, position1);
+
+            printf("Please specify where to insert the second card (%d): ", picked2);
+            scanf("%d", &position2);
+            insertAtPosition(&head, picked2, position2);
         }
 
         // Display the current stack
@@ -138,20 +132,33 @@ void displayList(struct Node *head)
     printf("NULL\n");
 }
 
-// Function to pick a card from a given position and return its value
-int pickCard(struct Node *head, int position)
+// Function to pick a card from the end of the list
+int pickCardFromEnd(struct Node *head)
 {
     struct Node *temp = head;
-    for (int i = 1; temp != NULL && i < position; i++)
+    struct Node *prev = NULL;
+
+    // Traverse to the end of the list
+    while (temp->next != NULL)
     {
+        prev = temp;
         temp = temp->next;
     }
-    if (temp == NULL)
+
+    int pickedData = temp->data;
+
+    // Delete the last node
+    if (prev != NULL)
     {
-        printf("Invalid position!\n");
-        return -1;
+        prev->next = NULL;
     }
-    return temp->data;
+    else
+    {
+        head = NULL; // If there's only one node
+    }
+
+    free(temp);
+    return pickedData;
 }
 
 // Function to insert a node at a specific position
@@ -184,35 +191,30 @@ void insertAtPosition(struct Node **head, int data, int position)
     }
 }
 
-// Function to delete a node from a specific position
-void deleteFromPosition(struct Node **head, int position)
+// Function to delete a node from the end of the list
+void deleteFromEnd(struct Node **head)
 {
     if (*head == NULL)
         return;
 
     struct Node *temp = *head;
-
-    if (position == 1)
-    {
-        *head = temp->next;
-        free(temp);
-        return;
-    }
-
     struct Node *prev = NULL;
-    for (int i = 1; temp != NULL && i < position; i++)
+
+    while (temp->next != NULL)
     {
         prev = temp;
         temp = temp->next;
     }
 
-    if (temp == NULL)
+    if (prev != NULL)
     {
-        printf("Position out of range.\n");
-        return;
+        prev->next = NULL;
+    }
+    else
+    {
+        *head = NULL; // Only one node was present
     }
 
-    prev->next = temp->next;
     free(temp);
 }
 
