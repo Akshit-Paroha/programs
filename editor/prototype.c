@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define STACK_SIZE 20
+#define STACK_SIZE 52
 
 // Node structure for the linked list
 struct Node
@@ -31,8 +31,13 @@ int main()
     int picked1, picked2, position1, position2;
     char choice;
 
-    // Initialize the linked list with pairs of numbers (1-10, each number appears twice)
-    int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 1, 2, 3, 4, 5, 6, 7, 8, 10, 10};
+    // Initialize the linked list with numbers (1-13, each appearing 4 times)
+    int numbers[] = {
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+    };
     int n = sizeof(numbers) / sizeof(numbers[0]);
 
     // Insert the numbers into the linked list
@@ -78,7 +83,8 @@ int main()
 
         if (picked1 == picked2)
         {
-            printf("\nMatched! Pushing %d onto the stack.\n", picked1);
+            printf("\nMatched! Pushing %d onto the stack twice.\n", picked1);
+            push(picked1);
             push(picked1);
 
             // Remove the matched pair from the linked list
