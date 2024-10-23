@@ -1,17 +1,22 @@
+//header files
 #include <stdio.h>
 #include <stdlib.h>
 
-#define STACK_SIZE 52
+//gobal declaration
+#define StackSize 52
 
+//node structure
 struct Node
 {
     int data;
     struct Node *next;
 };
 
-int stack[STACK_SIZE];
+//stack structure
+int stack[StackSize];
 int top = -1;
 
+//function declarations
 void insertAtEnd(struct Node **head, int data);
 void displayHiddenList(struct Node *head);
 void displayList(struct Node *head);
@@ -22,19 +27,23 @@ int getListLength(struct Node *head);
 void push(int data);
 void displayStack();
 
+//Main function
 int main()
 {
     struct Node *head = NULL;
     int position1, position2, picked1, picked2;
     char choice;
+    int i;
 
-    int numbers[] = {2, 2, 3, 4, 5, 6, 7, 9, 9, 11, 11, 12, 13,
-                     1, 1, 3, 4, 5, 6, 7, 8, 8, 10, 10, 12, 13,
-                     1, 3, 3, 5, 5, 6, 6, 8, 9, 11, 11, 12, 12,
-                     1, 2, 2, 4, 4, 7, 7, 8, 9, 10, 10, 13, 13};
+    int numbers[] = { 1, 1, 2, 3, 4, 4, 22, 22, 7, 7, 8, 9, 10,
+	                10, 11, 12, 13, 13, 99 ,99, 55, 55, 88, 9, 77, 77,
+	                1, 1, 22, 22, 4, 4, 6, 6, 7, 7, 8, 9, 10, 10, 11,
+					12, 13, 13, 3, 3, 66, 66, 8, 8, 11, 12 };
+					
     int n = sizeof(numbers) / sizeof(numbers[0]);
-
-    for (int i = 0; i < n; i++)
+    //  n = 208 bytes / 4 bytes = 52 
+    
+    for (i = 0; i < n; i++)
     {
         insertAtEnd(&head, numbers[i]);
     }
@@ -43,36 +52,28 @@ int main()
     {
         printf("\nHidden List: ");
         displayHiddenList(head);
-        printf("Remaining cards: %d\n", getListLength(head));
+        printf("Remaining cards in the list : %d\n", getListLength(head));
 
-        printf("\nDo you want to pick the first card from the end? (y/n): ");
+        printf("\nPick the first card from the end (y/Y): ");
         scanf(" %c", &choice);
+        
         if (choice == 'y' || choice == 'Y')
         {
             picked1 = pickCardFromEnd(head);
             printf("You picked: %d\n", picked1);
             deleteFromEnd(&head);
+            
         }
-        else
-        {
-            printf("Skipping the pick.\n");
-            continue;
-        }
-
-        printf("\nDo you want to pick the second card from the end? (y/n): ");
+        printf("\nPick the second card from the end (y/Y): ");
         scanf(" %c", &choice);
+        
         if (choice == 'y' || choice == 'Y')
         {
             picked2 = pickCardFromEnd(head);
             printf("You picked: %d\n", picked2);
             deleteFromEnd(&head);
         }
-        else
-        {
-            printf("Skipping the pick.\n");
-            continue;
-        }
-
+    
         if (picked1 == picked2)
         {
             printf("\nMatched! Pushing %d onto the stack twice.\n", picked1);
@@ -81,17 +82,18 @@ int main()
         }
         else
         {
-            printf("\nNot matched! Reinsert the cards back into the list.\n");
-            printf("Enter the position to reinsert the first card (%d): ", picked1);
+            printf("\nNot matched! \nRe-insert the cards back into the list.\n");
+            printf("\nEnter the position to re-insert the first card (%d): ", picked1);
             scanf("%d", &position1);
+            
             insertAtPosition(&head, picked1, position1);
 
-            printf("Enter the position to reinsert the second card (%d): ", picked2);
+            printf("\nEnter the position to reinsert the second card (%d): ", picked2);
             scanf("%d", &position2);
             insertAtPosition(&head, picked2, position2);
         }
 
-        printf("\nRevealed Stack: ");
+        printf("\nRevealed Stack : ");
         displayStack();
     }
 
@@ -101,6 +103,8 @@ int main()
     displayList(head);
     return 0;
 }
+
+//function definitions
 
 void insertAtEnd(struct Node **head, int data)
 {
@@ -166,6 +170,7 @@ void insertAtPosition(struct Node **head, int data, int position)
     }
 
     struct Node *temp = *head;
+    
     for (int i = 1; temp != NULL && i < position - 1; i++)
     {
         temp = temp->next;
@@ -209,7 +214,7 @@ void deleteFromEnd(struct Node **head)
 
 void push(int data)
 {
-    if (top < STACK_SIZE - 1)
+    if (top < StackSize - 1)
     {
         stack[++top] = data;
     }
