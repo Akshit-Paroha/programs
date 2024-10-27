@@ -1,10 +1,11 @@
-#include<stdio.h>
+#include <stdio.h>
 int main()
 {
-    int i=0;
-    do{
+    int i = 0;
+    do
+    {
         i++;
-        printf("%d\n",i);
-        
-    }while (i<10);
+        printf("%d\n", i);
+
+    } while (i < 10);
 }

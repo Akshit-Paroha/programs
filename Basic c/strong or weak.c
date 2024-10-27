@@ -1,22 +1,20 @@
-#include<stdio.h>
+#include <stdio.h>
 int main(void)
 {
-    int repeat = 0;
-    printf("How strong are you:");
-    scanf("%d",&repeat);
-    printf("You are ");
-    if (repeat < 5)
+  int repeat = 0;
+  printf("How strong are you:");
+  scanf("%d", &repeat);
+  printf("You are ");
+  if (repeat < 5)
     printf("weak");
-    else
+  else
+  {
+    while (repeat > 5)
     {
-        while (repeat>5)
-      {
-        printf("very ");
-    repeat--;
-        
-      };
+      printf("very ");
+      repeat--;
+    };
     printf("strong");
     return 0;
-        
-    };
+  };
 }
