@@ -15,14 +15,15 @@ int main()
     {
         key = a[i];
         j = i - 1;
-
         while (j >= 0 && key < a[j])
         {
             a[j + 1] = a[j];
             j--;
+            
         }
         a[j + 1] = key;
     }
+
     printf("Your sorted array is:\t");
 
     for (i = 0; i < s; i++)

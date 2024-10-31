@@ -19,8 +19,8 @@ int main()
             if (a[j] > a[j + 1])
             {
                 temp = a[j];
-                a[j] = a[j+1];
-                a[j+1] = temp;
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
             }
         }
     }
@@ -28,7 +28,6 @@ int main()
     printf("Your array is:\n");
     for (i = 0; i < n; i++)
     {
-        printf("%d ",a[i]);
+        printf("%d ", a[i]);
     }
-    
 }
