@@ -25,15 +25,15 @@ class textbook : public book
 public:
     string subject;
 
-    void textbookdetails(string t,string a, string s)
+    void textbookdetails(string t, string a, string s)
     {
-        bookdetails(t,a);
-        subject=s;
+        bookdetails(t, a);
+        subject = s;
     }
     void displaytextbook()
     {
         displaybook();
-        cout<<"subject:"<<subject;
+        cout << "subject:" << subject;
     }
 };
 
@@ -41,8 +41,8 @@ int main()
 {
     book b;
     textbook t;
-    b.bookdetails("the title is title","Akshit");
+    b.bookdetails("the title is title", "Akshit");
     b.displaybook();
-    t.textbookdetails("Basic mathematics","RD Sharma","Math");
+    t.textbookdetails("Basic mathematics", "RD Sharma", "Math");
     t.displaytextbook();
 }
