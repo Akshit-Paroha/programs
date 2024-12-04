@@ -55,9 +55,9 @@ public:
 int main()
 {
     Team t;
-    t.setOrganization("Tech Solutions Inc.");
-    t.setDepartment("IT Department");
-    t.setTeam("Development Team");
+    t.setOrganization("GPN");
+    t.setDepartment("CS Department");
+    t.setTeam("Students");
     t.showTeam();
 
     return 0;

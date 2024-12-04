@@ -1,3 +1,12 @@
-'m Akshit Paroha, a second-year computer engineering student at Government Polytechnic Nagpur. I'm passionate about coding, especially in C++, but I can also work with other languages like C, VB.NET, HTML, CSS, and JavaScript. I'm always up for learning new things and enjoy tackling challenges, like participating in hackathons.
-
-I have a strong interest in developing projects, particularly focusing on data structures and algorithms. Recently, I've been working on a game in C programming that involves linked
+Twinkle Twinkle, Little Star
+How I wonder what you are
+Up above the world so high
+Like a diamond in the sky
+Twinkle Twinkle Little Star
+How I wonder what you are!
+Twinkle Twinkle, Little Star
+How I wonder what you are
+Up above the world so high
+Like a diamond in the sky
+Twinkle Twinkle Little Star
+How I wonder what you are!

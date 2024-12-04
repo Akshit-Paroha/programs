@@ -22,7 +22,7 @@ int main()
         linecount++;
         if(line.find(find)!=string::npos)
         {
-            cout<<"Word found in line number:"<<linecount;
+            cout<<"Word found in line number:"<<linecount<<endl;
             found=true;
         }
     }
