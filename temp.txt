@@ -1,6 +1,1 @@
-        customerFile << "Purchased Item: " << itemName << endl;
-        customerFile << "Item Code: " << itemCode << endl;
-        customerFile << "Item Price: " << itemPrice << endl;
-        customerFile << "Total Purchase Amount: " << totalAmount << endl;
-        customerFile << "------------------------" << endl;
-        
+int arr[]= new int[5]
